@@ -1,0 +1,26 @@
+Index: linux-5.4.211/drivers/dax/Kconfig
+===================================================================
+--- linux-5.4.211.orig/drivers/dax/Kconfig
++++ linux-5.4.211/drivers/dax/Kconfig
+@@ -4,7 +4,7 @@ config DAX_DRIVER
+ 	bool
+ 
+ menuconfig DAX
+-	tristate "DAX: direct access to differentiated memory"
++	bool "DAX: direct access to differentiated memory"
+ 	select SRCU
+ 	default m if NVDIMM_DAX
+ 
+Index: linux-5.4.211/drivers/md/Kconfig
+===================================================================
+--- linux-5.4.211.orig/drivers/md/Kconfig
++++ linux-5.4.211/drivers/md/Kconfig
+@@ -486,7 +486,7 @@ config DM_FLAKEY
+          A target that intermittently fails I/O for debugging purposes.
+ 
+ config DM_VERITY
+-	tristate "Verity target support"
++	bool "Verity target support"
+ 	depends on BLK_DEV_DM
+ 	select CRYPTO
+ 	select CRYPTO_HASH
