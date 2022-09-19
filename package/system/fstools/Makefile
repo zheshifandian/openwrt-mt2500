@@ -8,13 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=fstools
-PKG_RELEASE:=1
+PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL=$(PROJECT_GIT)/project/fstools.git
-PKG_MIRROR_HASH:=a485792d90c71cd4fb396ce97f42a57ee4d2a3d78e5f3fd0748270ffb14209e6
-PKG_SOURCE_DATE:=2021-01-04
-PKG_SOURCE_VERSION:=c53b18820756f6f32ad0782d3bf489422b7c4ad3
+PKG_MIRROR_HASH:=1b16e5ef533c7b30b3ccc4b7001c18b23c44890021aa4ae54850dbec56e7dc7c
+PKG_SOURCE_DATE:=2022-06-02
+PKG_SOURCE_VERSION:=93369be040612c906bcbb1631f44a92fa4122d24
 CMAKE_INSTALL:=1
 
 PKG_LICENSE:=GPL-2.0
@@ -32,21 +32,14 @@ include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
 
 TARGET_LDFLAGS += $(if $(CONFIG_USE_GLIBC),-lrt)
-TARGET_LDFLAGS += $(if $(CONFIG_USE_GLIBC),-ldl)
 CMAKE_OPTIONS += $(if $(CONFIG_FSTOOLS_UBIFS_EXTROOT),-DCMAKE_UBIFS_EXTROOT=y)
 CMAKE_OPTIONS += $(if $(CONFIG_FSTOOLS_OVL_MOUNT_FULL_ACCESS_TIME),-DCMAKE_OVL_MOUNT_FULL_ACCESS_TIME=y)
 CMAKE_OPTIONS += $(if $(CONFIG_FSTOOLS_OVL_MOUNT_COMPRESS_ZLIB),-DCMAKE_OVL_MOUNT_COMPRESS_ZLIB=y)
 
-define Package/libfstools-bootparam
-  SECTION:=libs
-  CATEGORY:=Libraries
-  TITLE:=Boot parameter library for OpenWrt filesystem tools
-endef
-
 define Package/fstools
   SECTION:=base
   CATEGORY:=Base system
-  DEPENDS:=+ubox +USE_GLIBC:librt +NAND_SUPPORT:ubi-utils +libfstools-bootparam
+  DEPENDS:=+ubox +USE_GLIBC:librt +NAND_SUPPORT:ubi-utils
   TITLE:=OpenWrt filesystem tools
   MENU:=1
 endef
@@ -86,7 +79,7 @@ define Package/block-mount
   SECTION:=base
   CATEGORY:=Base system
   TITLE:=Block device mounting and checking
-  DEPENDS:=+ubox +libubox +libuci +libblobmsg-json +libjson-c +libfstools-bootparam
+  DEPENDS:=+ubox +libubox +libuci +libblobmsg-json +libjson-c
 endef
 
 define Package/blockd
@@ -94,12 +87,6 @@ define Package/blockd
   CATEGORY:=Base system
   TITLE:=Block device automounting
   DEPENDS:=+block-mount +fstools +libubus +kmod-fs-autofs4 +libblobmsg-json +libjson-c
-endef
-
-define Package/libfstools-bootparam/install
-	$(INSTALL_DIR) $(1)/lib
-
-	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/lib/libfstools-bootparam.so $(1)/lib/
 endef
 
 define Package/fstools/install
@@ -145,7 +132,6 @@ define Build/InstallDev
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libubi-utils.a $(1)/usr/lib/
 endef
 
-$(eval $(call BuildPackage,libfstools-bootparam))
 $(eval $(call BuildPackage,fstools))
 $(eval $(call BuildPackage,snapshot-tool))
 $(eval $(call BuildPackage,block-mount))

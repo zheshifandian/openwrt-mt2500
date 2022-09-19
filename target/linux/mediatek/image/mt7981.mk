@@ -207,3 +207,14 @@ define Device/glinet_gl-x3000
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-gl-metadata
 endef
 TARGET_DEVICES += glinet_gl-x3000
+
+define Device/glinet_gl-mt2500
+  DEVICE_VENDOR := GL.iNet
+  DEVICE_MODEL := GL-MT2500
+  DEVICE_DTS := mt7981-gl-mt2500
+  SUPPORTED_DEVICES := glinet,mt2500-emmc
+  DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
+  DEVICE_PACKAGES := mkf2fs kmod-mmc kmod-fs-f2fs gdisk
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-gl-metadata
+endef
+TARGET_DEVICES += glinet_gl-mt2500
