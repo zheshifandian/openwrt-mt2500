@@ -111,7 +111,10 @@ int mtk_sgmii_setup_mode_force(struct mtk_sgmii *ss, unsigned int id,
 		val |= SGMII_SPEED_10;
 		break;
 	case SPEED_100:
-		val |= SGMII_SPEED_100;
+		if (state->interface == PHY_INTERFACE_MODE_2500BASEX)
+			val |= SGMII_SPEED_1000;
+		else
+			val |= SGMII_SPEED_100;
 		break;
 	case SPEED_2500:
 	case SPEED_1000:

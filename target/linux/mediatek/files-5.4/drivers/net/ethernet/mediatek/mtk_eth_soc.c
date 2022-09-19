@@ -2765,10 +2765,10 @@ static int mtk_open(struct net_device *dev)
 		 */
 
 		// clear interrupt source for gpy211
-		_mtk_mdio_read(eth, phylink_priv->phyaddr, 0x1A);
+		mdiobus_read(eth->mii_bus, phylink_priv->phyaddr, 0x1A);
 
 		// enable link status change interrupt for gpy211
-		_mtk_mdio_write(eth, phylink_priv->phyaddr, 0x19, 0x0001);
+		mdiobus_write(eth->mii_bus, phylink_priv->phyaddr, 0x19, 0x0001);
 
 		phylink_priv->dev = dev;
 
@@ -2828,9 +2828,9 @@ static int mtk_stop(struct net_device *dev)
 
 	phy_node = of_parse_phandle(mac->of_node, "phy-handle", 0);
 	if (phy_node) {
-		val = _mtk_mdio_read(eth, 0, 0);
+		val = mdiobus_read(eth->mii_bus, 0, 0);
 		val |= BMCR_PDOWN;
-		_mtk_mdio_write(eth, 0, 0, val);
+		mdiobus_write(eth->mii_bus, 0, 0, val);
 	} else if (eth->sgmii->regmap[mac->id]) {
 		regmap_read(eth->sgmii->regmap[mac->id], SGMSYS_QPHY_PWR_STATE_CTRL, &val);
 		val |= SGMII_PHYA_PWD;
@@ -3509,6 +3509,40 @@ static const struct net_device_ops mtk_netdev_ops = {
 #endif
 };
 
+static void phylink_fixed_state(struct net_device *dev,
+                                         struct phylink_link_state *state)
+{
+#define PHY_MIISTAT            0x18    /* MII state */
+#define PHY_MIISTAT_SPD_MASK   GENMASK(2, 0)
+#define PHY_MIISTAT_DPX                BIT(3)
+#define PHY_MIISTAT_LS         BIT(10)
+#define PHY_MIISTAT_SPD_10     0
+#define PHY_MIISTAT_SPD_100    1
+#define PHY_MIISTAT_SPD_1000   2
+#define PHY_MIISTAT_SPD_2500   4
+
+       struct mtk_mac *mac = netdev_priv(dev);
+       u32 val = mdiobus_read(mac->hw->mii_bus, 0x05, PHY_MIISTAT);
+
+       state->link = (val & PHY_MIISTAT_LS) ? 1 : 0;
+       state->duplex = (val & PHY_MIISTAT_DPX) ? DUPLEX_FULL : DUPLEX_HALF;
+
+       switch (FIELD_GET(PHY_MIISTAT_SPD_MASK, val)) {
+       case PHY_MIISTAT_SPD_10:
+               state->speed = SPEED_10;
+               break;
+       case PHY_MIISTAT_SPD_100:
+               state->speed = SPEED_100;
+               break;
+       case PHY_MIISTAT_SPD_1000:
+               state->speed = SPEED_1000;
+               break;
+       case PHY_MIISTAT_SPD_2500:
+               state->speed = SPEED_2500;
+               break;
+       }
+}
+
 static int mtk_add_mac(struct mtk_eth *eth, struct device_node *np)
 {
 	const __be32 *_id = of_get_property(np, "reg", NULL);
@@ -3590,6 +3624,8 @@ static int mtk_add_mac(struct mtk_eth *eth, struct device_node *np)
 	fixed_node = fwnode_get_named_child_node(of_fwnode_handle(mac->of_node),
 						 "fixed-link");
 	if (fixed_node) {
+		phylink_fixed_state_cb(phylink, phylink_fixed_state);
+
 		desc = fwnode_get_named_gpiod(fixed_node, "link-gpio",
 					      0, GPIOD_IN, "?");
 		if (!IS_ERR(desc)) {

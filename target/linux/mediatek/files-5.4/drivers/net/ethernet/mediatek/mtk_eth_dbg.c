@@ -417,7 +417,7 @@ void mii_mgr_read_combine(struct mtk_eth *eth, u32 phy_addr, u32 phy_register,
 		*read_data = mt7530_mdio_r32(eth, phy_register);
 
 	else
-		*read_data = _mtk_mdio_read(eth, phy_addr, phy_register);
+		*read_data = mdiobus_read(eth->mii_bus, phy_addr, phy_register);
 }
 
 void mii_mgr_write_combine(struct mtk_eth *eth, u16 phy_addr, u16 phy_register,
@@ -427,17 +427,17 @@ void mii_mgr_write_combine(struct mtk_eth *eth, u16 phy_addr, u16 phy_register,
 		mt7530_mdio_w32(eth, phy_register, write_data);
 
 	else
-		_mtk_mdio_write(eth, phy_addr, phy_register, write_data);
+		mdiobus_write(eth->mii_bus, phy_addr, phy_register, write_data);
 }
 
 static void mii_mgr_read_cl45(struct mtk_eth *eth, u16 port, u16 devad, u16 reg, u16 *data)
 {
-	*data = _mtk_mdio_read(eth, port, mdiobus_c45_addr(devad, reg));
+	*data = mdiobus_read(eth->mii_bus, port, mdiobus_c45_addr(devad, reg));
 }
 
 static void mii_mgr_write_cl45(struct mtk_eth *eth, u16 port, u16 devad, u16 reg, u16 data)
 {
-	_mtk_mdio_write(eth, port, mdiobus_c45_addr(devad, reg), data);
+	mdiobus_write(eth->mii_bus, port, mdiobus_c45_addr(devad, reg), data);
 }
 
 int mtk_do_priv_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
