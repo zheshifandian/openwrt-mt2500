@@ -26,7 +26,7 @@
 		wan = "eth0";
 		lan = "eth1";
 		usb-port = "1-1";
-		flash_size = <8192>;
+		flash_size = <7456>;
 		temperature = "/sys/devices/virtual/thermal/thermal_zone0/temp";
 		factory_data {
 			device_mac = "/dev/mmcblk0boot1", "0x0a";
