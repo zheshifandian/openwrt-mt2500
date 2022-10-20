@@ -1470,6 +1470,17 @@ endef
 
 $(eval $(call KernelPackage,usb-net-pl))
 
+define KernelPackage/usb-net-vl600
+  TITLE:=LG VL600 modem dongle
+  KCONFIG:=CONFIG_USB_VL600
+  FILES:=$(LINUX_DIR)/drivers/net/usb/lg-vl600.ko
+  AUTOLOAD:=$(call AutoProbe,lg-vl600)
+  DEPENDS:=+kmod-usb-net-cdc-ether
+  $(call AddDepends/usb-net)
+endef
+
+$(eval $(call KernelPackage,usb-net-vl600))
+
 define KernelPackage/usb-hid
   TITLE:=Support for USB Human Input Devices
   KCONFIG:=CONFIG_HID_SUPPORT=y CONFIG_USB_HID CONFIG_USB_HIDDEV=y
