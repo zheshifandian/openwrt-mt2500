@@ -25,7 +25,7 @@
 		model = "mt2500";
 		wan = "eth0";
 		lan = "eth1";
-		usb-port = "1-1";
+		usb-port = "1-1,2-1";
 		flash_size = <7456>;
 		temperature = "/sys/devices/virtual/thermal/thermal_zone0/temp";
 		factory_data {
