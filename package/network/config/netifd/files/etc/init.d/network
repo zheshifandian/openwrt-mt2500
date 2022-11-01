@@ -40,6 +40,11 @@ stop_service() {
 	sleep 1
 }
 
+service_running() {
+        ubus -t 120 wait_for network.interface
+        /sbin/wifi up
+}
+
 validate_atm_bridge_section()
 {
 	uci_validate_section network "atm-bridge" "${1}" \
@@ -139,6 +144,7 @@ service_triggers()
 }
 
 shutdown() {
-	ifdown -a
-	sleep 1
+        /sbin/wifi down
+        ifdown -a
+        sleep 1
 }

@@ -1,0 +1,8 @@
+/dts-v1/;
+
+#include "mt7981-gl-mt3000.dts"
+
+/ {
+	model = "GL.iNet GL-X3000";
+	compatible = "glinet,x3000-snand", "mediatek,mt7981";
+};
