@@ -186,7 +186,7 @@ define Device/glinet_gl-mt3000
   KERNEL_IN_UBI := 1
   IMAGES += factory.bin
   IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
-  IMAGE/sysupgrade.bin := sysupgrade-tar | append-gl-metadata
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += glinet_gl-mt3000
 
@@ -204,7 +204,7 @@ define Device/glinet_gl-x3000
   KERNEL_IN_UBI := 1
   IMAGES += factory.bin
   IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
-  IMAGE/sysupgrade.bin := sysupgrade-tar | append-gl-metadata
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += glinet_gl-x3000
 
@@ -215,6 +215,6 @@ define Device/glinet_gl-mt2500
   SUPPORTED_DEVICES := glinet,mt2500-emmc
   DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
   DEVICE_PACKAGES := mkf2fs kmod-mmc kmod-fs-f2fs gdisk
-  IMAGE/sysupgrade.bin := sysupgrade-tar | append-gl-metadata
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += glinet_gl-mt2500
