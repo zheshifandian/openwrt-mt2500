@@ -7,7 +7,7 @@ define Device/mt7981-spim-nor-rfb
   DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
   SUPPORTED_DEVICES := mediatek,mt7981-spim-nor-rfb
 endef
-TARGET_DEVICES += mt7981-spim-nor-rfb
+#TARGET_DEVICES += mt7981-spim-nor-rfb
 
 define Device/mt7981-spim-nand-2500wan-gmac2
   DEVICE_VENDOR := MediaTek
@@ -24,7 +24,7 @@ define Device/mt7981-spim-nand-2500wan-gmac2
   IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += mt7981-spim-nand-2500wan-gmac2
+#TARGET_DEVICES += mt7981-spim-nand-2500wan-gmac2
 
 define Device/mt7981-spim-nand-rfb
   DEVICE_VENDOR := MediaTek
@@ -41,7 +41,7 @@ define Device/mt7981-spim-nand-rfb
   IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += mt7981-spim-nand-rfb
+#TARGET_DEVICES += mt7981-spim-nand-rfb
 
 define Device/mt7981-spim-nand-gsw
   DEVICE_VENDOR := MediaTek
@@ -58,7 +58,7 @@ define Device/mt7981-spim-nand-gsw
   IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += mt7981-spim-nand-gsw
+#TARGET_DEVICES += mt7981-spim-nand-gsw
 
 define Device/mt7981-emmc-rfb
   DEVICE_VENDOR := MediaTek
@@ -71,7 +71,7 @@ define Device/mt7981-emmc-rfb
 		     kmod-nls-iso8859-1
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += mt7981-emmc-rfb
+#TARGET_DEVICES += mt7981-emmc-rfb
 
 define Device/mt7981-sd-rfb
   DEVICE_VENDOR := MediaTek
@@ -84,7 +84,7 @@ define Device/mt7981-sd-rfb
 		     kmod-nls-iso8859-1
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += mt7981-sd-rfb
+#TARGET_DEVICES += mt7981-sd-rfb
 
 define Device/mt7981-snfi-nand-2500wan-p5
   DEVICE_VENDOR := MediaTek
@@ -101,7 +101,7 @@ define Device/mt7981-snfi-nand-2500wan-p5
   IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += mt7981-snfi-nand-2500wan-p5
+#TARGET_DEVICES += mt7981-snfi-nand-2500wan-p5
 
 define Device/mt7981-fpga-spim-nor
   DEVICE_VENDOR := MediaTek
@@ -110,7 +110,7 @@ define Device/mt7981-fpga-spim-nor
   DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
   SUPPORTED_DEVICES := mediatek,mt7981-fpga-nor
 endef
-TARGET_DEVICES += mt7981-fpga-spim-nor
+#TARGET_DEVICES += mt7981-fpga-spim-nor
 
 define Device/mt7981-fpga-snfi-nand
   DEVICE_VENDOR := MediaTek
@@ -127,7 +127,7 @@ define Device/mt7981-fpga-snfi-nand
   IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += mt7981-fpga-snfi-nand
+#TARGET_DEVICES += mt7981-fpga-snfi-nand
 
 define Device/mt7981-fpga-spim-nand
   DEVICE_VENDOR := MediaTek
@@ -144,7 +144,7 @@ define Device/mt7981-fpga-spim-nand
   IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += mt7981-fpga-spim-nand
+#TARGET_DEVICES += mt7981-fpga-spim-nand
 
 define Device/mt7981-fpga-emmc
   DEVICE_VENDOR := MediaTek
@@ -157,7 +157,7 @@ define Device/mt7981-fpga-emmc
 		     kmod-nls-iso8859-1
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += mt7981-fpga-emmc
+#TARGET_DEVICES += mt7981-fpga-emmc
 
 define Device/mt7981-fpga-sd
   DEVICE_VENDOR := MediaTek
@@ -170,7 +170,18 @@ define Device/mt7981-fpga-sd
 		     kmod-nls-iso8859-1
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += mt7981-fpga-sd
+#TARGET_DEVICES += mt7981-fpga-sd
+
+define Device/glinet_gl-mt2500
+  DEVICE_VENDOR := GL.iNet
+  DEVICE_MODEL := GL-MT2500
+  DEVICE_DTS := mt7981-gl-mt2500
+  SUPPORTED_DEVICES := glinet,mt2500-emmc
+  DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
+  DEVICE_PACKAGES := blkid blockdev gdisk kmod-fs-f2fs kmod-mmc mkf2fs losetup
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+TARGET_DEVICES += glinet_gl-mt2500
 
 define Device/glinet_gl-mt3000
   DEVICE_VENDOR := GL.iNet
@@ -188,7 +199,7 @@ define Device/glinet_gl-mt3000
   IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += glinet_gl-mt3000
+#TARGET_DEVICES += glinet_gl-mt3000
 
 define Device/glinet_gl-x3000
   DEVICE_VENDOR := GL.iNet
@@ -206,15 +217,4 @@ define Device/glinet_gl-x3000
   IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
-TARGET_DEVICES += glinet_gl-x3000
-
-define Device/glinet_gl-mt2500
-  DEVICE_VENDOR := GL.iNet
-  DEVICE_MODEL := GL-MT2500
-  DEVICE_DTS := mt7981-gl-mt2500
-  SUPPORTED_DEVICES := glinet,mt2500-emmc
-  DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
-  DEVICE_PACKAGES := mkf2fs kmod-mmc kmod-fs-f2fs gdisk
-  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
-endef
-TARGET_DEVICES += glinet_gl-mt2500
+#TARGET_DEVICES += glinet_gl-x3000
