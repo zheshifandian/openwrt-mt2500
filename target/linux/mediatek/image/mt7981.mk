@@ -178,7 +178,7 @@ define Device/glinet_gl-mt2500
   DEVICE_DTS := mt7981-gl-mt2500
   SUPPORTED_DEVICES := glinet,mt2500-emmc
   DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
-  DEVICE_PACKAGES := blkid blockdev gdisk kmod-fs-f2fs kmod-mmc mkf2fs losetup
+  DEVICE_PACKAGES := blkid blockdev gdisk kmod-fs-f2fs kmod-mediatek_hnat kmod-mmc mkf2fs losetup mii_mgr mtk_factory_rw regs switch
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += glinet_gl-mt2500
