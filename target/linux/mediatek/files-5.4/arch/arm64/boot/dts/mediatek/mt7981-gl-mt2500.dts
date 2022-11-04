@@ -33,6 +33,7 @@
 			device_ddns = "/dev/mmcblk0boot1", "0x10";
 			device_sn_bak = "/dev/mmcblk0boot1", "0x20";
 			device_sn = "/dev/mmcblk0boot1", "0x30";
+			country_code = "/dev/mmcblk0boot1", "0x88";
 		};
 	};
 
