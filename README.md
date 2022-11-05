@@ -1,11 +1,14 @@
-# 欢迎来到 Lean 的 Openwrt 源码仓库
+# 欢迎来到 Lean 的 LEDE 源码仓库
 
-如何编译自己需要的 OpenWrt 固件 [How to build your Openwrt firmware](./README_EN.md)
+如何编译自己需要的 LEDE 固件 [How to build your LEDE firmware](./README_EN.md)
 
 ## 官方讨论群
 如有技术问题需要讨论或者交流，欢迎加入以下群：
 1. QQ 讨论群： Op固件技术研究群 ,号码 891659613 ，加群链接：[点击加入](https://jq.qq.com/?_wv=1027&k=XL8SK5aC "Op固件技术研究群")
 2. TG 讨论群： OP 编译官方大群 ，加群链接：[点击加入](https://t.me/JhKgAA6Hx1 "OP 编译官方大群")
+3. Rockchip RK3568 预编译固件发布 Release 下载更新地址 (包括 H68K )：<https://github.com/coolsnowwolf/lede/releases/tag/20220716>
+
+<img src="https://github.com/coolsnowwolf/lede/blob/master/doc/h68k.jpg?raw=true" width=600  />
 
 ## 注意
 
@@ -22,7 +25,7 @@
    ```bash
    sudo apt update -y
    sudo apt full-upgrade -y
-   sudo apt install -y ack antlr3 asciidoc autoconf automake autopoint binutils bison build-essential \
+   sudo apt install -y ack antlr3 aria2 asciidoc autoconf automake autopoint binutils bison build-essential \
    bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib \
    git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev \
    libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz \
@@ -127,15 +130,9 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 ## 软路由介绍
 
-iKOOLCORE 硬酷R1 多网口小主机 - N5105/N6005 : Cube box, rest fun. 方寸之间，尽是乐趣
-
-(商品介绍页面 - 深圳市硬酷科技)：
-[Lean用户R1专属券](https://taoquan.taobao.com/coupon/unify_apply.htm?sellerId=1981117776&activityId=3eb8a2ad3c8945ed831b203f44dc218b)
-[N5105下单链接](https://item.taobao.com/item.htm?ft=t&id=682987219699)
-[N6005下单链接](https://item.taobao.com/item.htm?ft=t&id=682672722483)  
+iKOOLCORE 硬酷R1 多网口小主机 - N5105/N6005 : Cube box, rest fun. 方寸之间，尽享乐趣
 
 (商品介绍页面 - 硬酷科技（支持花呗）)：
-[Lean用户R1专属券](https://taoquan.taobao.com/coupon/unify_apply.htm?sellerId=2208215115814&activityId=e013790422b849edb3a71e4e6aa46ff3)
 [下单链接](https://item.taobao.com/item.htm?ft=t&id=682987219699)
 
 [![r1](doc/r1.jpg)](https://item.taobao.com/item.htm?ft=t&id=682025492099)
