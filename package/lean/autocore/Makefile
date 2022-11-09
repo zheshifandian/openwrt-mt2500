@@ -17,7 +17,7 @@ define Package/autocore-arm
   MAINTAINER:=CN_SZTL
   DEPENDS:=@(arm||aarch64) \
     +TARGET_bcm27xx:bcm27xx-userland \
-	+TARGET_bcm53xx:nvram +ethtool
+	+TARGET_bcm53xx:nvram +ethtool +mhz
   VARIANT:=arm
 endef
 

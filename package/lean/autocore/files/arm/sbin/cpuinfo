@@ -32,7 +32,8 @@ else
 fi
 
 if grep -q "mt798" "/etc/openwrt_release"; then
-	echo -n "${cpu_arch} x ${cpu_cores} ${cpu_temp}"
+	cpu_freq="$(mhz | awk -F 'cpu_MHz=' '{printf("%.fMHz",$2)}')"
+	echo -n "${cpu_arch} x ${cpu_cores} ${cpu_freq}, ${cpu_temp}"
 else
     echo -n "${cpu_arch} x ${cpu_cores} (${big_cpu_freq}${cpu_freq}, ${cpu_temp})"
 fi
