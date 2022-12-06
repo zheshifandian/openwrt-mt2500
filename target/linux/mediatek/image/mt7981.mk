@@ -201,6 +201,17 @@ define Device/glinet_gl-x3000
 endef
 TARGET_DEVICES += glinet_gl-x3000
 
+define Device/glinet_gl-xe3000
+  DEVICE_VENDOR := GL.iNet
+  DEVICE_MODEL := GL-XE3000
+  DEVICE_DTS := mt7981-gl-xe3000
+  DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
+  SUPPORTED_DEVICES := glinet,xe3000-emmc
+  DEVICE_PACKAGES := kmod-hwmon-pwmfan mkf2fs kmod-mmc kmod-fs-f2fs gdisk
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-gl-metadata
+endef
+TARGET_DEVICES += glinet_gl-xe3000
+
 define Device/glinet_gl-mt2500
   DEVICE_VENDOR := GL.iNet
   DEVICE_MODEL := GL-MT2500
