@@ -1,0 +1,15 @@
+Index: linux-5.4.211/drivers/pinctrl/mediatek/pinctrl-mt7981.c
+===================================================================
+--- linux-5.4.211.orig/drivers/pinctrl/mediatek/pinctrl-mt7981.c
++++ linux-5.4.211/drivers/pinctrl/mediatek/pinctrl-mt7981.c
+@@ -699,8 +699,8 @@ static int mt7981_spi2_wp_hold_funcs[] =
+ static int mt7981_uart1_0_pins[] = { 16, 17, 18, 19, };
+ static int mt7981_uart1_0_funcs[] = { 4, 4, 4, 4, };
+ 
+-static int mt7981_uart1_1_pins[] = { 26, 27, 28, 29, };
+-static int mt7981_uart1_1_funcs[] = { 2, 2, 2, 2, };
++static int mt7981_uart1_1_pins[] = { 26, 27, };
++static int mt7981_uart1_1_funcs[] = { 2, 2, };
+ 
+ /* UART2 */
+ static int mt7981_uart2_1_pins[] = { 22, 23, 24, 25, };
