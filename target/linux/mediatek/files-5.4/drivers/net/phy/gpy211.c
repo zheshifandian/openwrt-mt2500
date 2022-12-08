@@ -2,6 +2,7 @@
 #include <linux/bitfield.h>
 #include <linux/module.h>
 #include <linux/phy.h>
+#include <linux/delay.h>
 
 static int gpy211_phy_config_init(struct phy_device *phydev)
 {
@@ -10,10 +11,19 @@ static int gpy211_phy_config_init(struct phy_device *phydev)
 
 int gpy211_phy_probe(struct phy_device *phydev)
 {
+	int i;
 	int sgmii_reg = phy_read_mmd(phydev, MDIO_MMD_VEND1, 8);
 
+	//GPY211 with external flash requires at least 750ms to wait for mdio ready, here 1000ms
+	for(i=0;i<1000;i++){
+		if( sgmii_reg > 0 )
+			break;
+		usleep_range(1000,1001);
+		sgmii_reg = phy_read_mmd(phydev, MDIO_MMD_VEND1, 8);
+	}
+
 	/* enable 2.5G SGMII rate adaption */
-	phy_write_mmd(phydev, MDIO_MMD_VEND1, 8, 0x24e2);
+	phy_write_mmd(phydev, MDIO_MMD_VEND1, 8, 0xa4fa);
 
 	return 0;
 }
