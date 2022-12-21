@@ -195,15 +195,8 @@ define Device/glinet_gl-x3000
   DEVICE_MODEL := GL-X3000
   DEVICE_DTS := mt7981-gl-x3000
   DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
-  SUPPORTED_DEVICES := glinet,x3000-snand
-  DEVICE_PACKAGES := kmod-hwmon-pwmfan
-  UBINIZE_OPTS := -E 5
-  BLOCKSIZE := 128k
-  PAGESIZE := 2048
-  IMAGE_SIZE := 65536k
-  KERNEL_IN_UBI := 1
-  IMAGES += factory.bin
-  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
+  SUPPORTED_DEVICES := glinet,x3000-emmc
+  DEVICE_PACKAGES := kmod-hwmon-pwmfan mkf2fs kmod-mmc kmod-fs-f2fs gdisk
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-gl-metadata
 endef
 TARGET_DEVICES += glinet_gl-x3000
